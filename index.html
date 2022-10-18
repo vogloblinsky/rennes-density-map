@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="" />
+        <meta property="og:type" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:image" content="" />
+
+        <link rel="stylesheet" href="lib/vizicities.css" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            html,
+            body {
+                height: 100%;
+                overflow: hidden;
+            }
+            #world {
+                height: 100%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="world"></div>
+        <script src="lib/three.min.js"></script>
+        <script src="lib/TweenMax.min.js"></script>
+        <script src="lib/chroma.min.js"></script>
+        <script src="lib/vizicities.js"></script>
+        <script>
+            var coords = [48.1136493612153, -1.6780694297359031];
+            var world = VIZI.world('world', {
+                skybox: false,
+                postProcessing: false,
+            }).setView(coords);
+            VIZI.Controls.orbit().addTo(world);
+
+            VIZI.imageTileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+                attribution: '© Map & Geo Data <a href="https://openstreetmap.org/copyright/">OpenStreetMap</a>',
+            }).addTo(world);
+
+            // Chroma scale for nb_inscrits-based colours
+            var colourScale = chroma.scale('YlOrBr').domain([0, 5000]);
+
+            fetch('./resultats_elections_cumul_presidentielles_rennes_2022.geojson')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    const lightData = Object.assign({}, data);
+                    VIZI.geoJSONLayer(lightData, {
+                        style: function (feature) {
+                            const height = feature.properties.nb_inscrits / 5;
+                            const colour = colourScale(height).hex();
+                            return {
+                                color: colour,
+                                height: height,
+                            };
+                        },
+                    }).addTo(world);
+                });
+        </script>
+    </body>
+</html>
