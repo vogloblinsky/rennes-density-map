@@ -2,4 +2,4 @@
 
 Density map of Rennes using last presidential election datas.
 
-![screenshot](rennes-density-map.png)
+![screenshot](./src/rennes-density-map.png)
