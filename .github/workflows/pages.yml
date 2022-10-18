@@ -1,0 +1,16 @@
+name: Deploy
+
+on: [push]
+
+jobs:
+    deploy:
+        name: Deploy on Github pages 🚀
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout 🛎️
+              uses: actions/checkout@v3
+
+            - name: Deploy 🚀
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: src
