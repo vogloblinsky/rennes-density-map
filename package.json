@@ -1,0 +1,24 @@
+{
+    "name": "rennes-density-map",
+    "version": "1.0.0",
+    "description": "Density map of Rennes",
+    "scripts": {
+        "filter-data": "node scripts/filter-geojson.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vogloblinsky/rennes-density-map.git"
+    },
+    "keywords": [],
+    "author": "Vincent Ogloblinsky",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vogloblinsky/rennes-density-map/issues"
+    },
+    "homepage": "https://github.com/vogloblinsky/rennes-density-map#readme",
+    "devDependencies": {
+        "fs-extra": "^10.1.0",
+        "http-server": "^14.1.1",
+        "simplify-geojson": "^1.0.5"
+    }
+}
